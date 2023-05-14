@@ -1,15 +1,16 @@
 import slackweb
 import requests
 
+SLACK_URL = ""
+LINE_TOKEN = ""
+
+
 class Notification():
-    def slack_notify(*,text='てすと'):
-        slack = slackweb.Slack(url="https://hooks.slack.com/services/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")
-        #slack.notify(text="pythonからslackさんへ")
+    def slack_notify(*, text=None):
+        slack = slackweb.Slack(url=SLACK_URL)
         slack.notify(text=text)
 
-    def line_notify(*,text='てすと'):
-        line_notify_token = 'oSEfAxb2DcHoYsFhSPkBHeki8z70wFYUXCYj8fjXyV6'
+    def line_notify(*, text=None):
+        line_notify_token = LINE_TOKEN
         line_notify_api = 'https://notify-api.line.me/api/notify'
-        headers = {'Authorization': f'Bearer {line_notify_token}'}
-        data = {'message': f'{text}'}
-        requests.post(line_notify_api, headers = headers, data = data)
+        requests.post(line_notify_api, headers={'Authorization': f'Bearer {line_notify_token}'}, data={'message': f'{text}'})
